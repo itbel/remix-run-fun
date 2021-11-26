@@ -20,7 +20,7 @@ export default function Posts() {
         <tbody>
           {data.map((country, index) => (
             <tr key={country.id} style={index % 2 === 0 ? {backgroundColor:'#efefef'}: {}}>
-              <td>{country.id.toString()}</td>
+              <td>{index+1}</td>
               <td style={{textAlign:'end'}}>
                 <Link to={country.id.toString()}>{country.name}</Link>
               </td>

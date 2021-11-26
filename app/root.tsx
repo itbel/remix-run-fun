@@ -92,6 +92,9 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
               <li>
                 <Link to="/countries">Countries</Link>
               </li>
+              <li>
+                <Link to="/teams">Teams</Link>
+              </li>
             </ul>
           </nav>
         </div>

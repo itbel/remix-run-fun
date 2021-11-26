@@ -14,15 +14,15 @@ export let loader: LoaderFunction = () => {
   return getTeams();
 };
 
-export let action: ActionFunction = async ({ request, }) => {
+export let action: ActionFunction = async ({ request }) => {
   let body = await request.formData();
-  switch(request.method){
-    case 'PUT':
+  switch (request.method) {
+    case "PUT":
       await createTeam(body);
-    case 'DELETE':
-      await deleteTeam(body)
+    case "DELETE":
+      await deleteTeam(body);
   }
-  return redirect('/teams')
+  return redirect("/teams");
 };
 
 export let meta: MetaFunction = () => {
@@ -49,13 +49,15 @@ export default function Index() {
           <tbody>
             {data.map((team, index) => (
               <tr key={team.id.toString()}>
-                <td>{index+1}</td>
-                <td><Link to={team.id.toString()}>{team.name}</Link></td>
+                <td>{index + 1}</td>
                 <td>
-                <Form method="delete">
-                  <input value={team.id} readOnly name="id" hidden/>
-                  <button type="submit"> - </button>
-                </Form>
+                  <Link to={team.id.toString()}>{team.name}</Link>
+                </td>
+                <td>
+                  <Form method="delete">
+                    <input value={team.id} readOnly name="id" hidden />
+                    <button type="submit"> - </button>
+                  </Form>
                 </td>
               </tr>
             ))}
@@ -72,7 +74,9 @@ export default function Index() {
               ></input>
             </label>
 
-            <button type="submit">{transition.state === "submitting" ? "Creating..." : "Create"}</button>
+            <button type="submit">
+              {transition.state === "submitting" ? "Creating..." : "Create"}
+            </button>
           </fieldset>
         </Form>
       </main>

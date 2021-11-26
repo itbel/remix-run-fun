@@ -83,14 +83,11 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
     <div className="remix-app">
       <header className="remix-app__header">
         <div className="container remix-app__header-content">
-          <span>ayyy</span>
+          <span style={{fontSize:32, fontWeight:'700'}}>Testing Remix</span>
           <nav aria-label="Main navigation" className="remix-app__header-nav">
             <ul>
               <li>
                 <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/posts">Posts</Link>
               </li>
               <li>
                 <Link to="/countries">Countries</Link>

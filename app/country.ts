@@ -11,12 +11,10 @@ export type Country = {
   };
   
   export async function getCountries() {
-    const { data } = await supabase.from("countries").select("id, name");
+    const { data, error } = await supabase.from("countries").select("id, name").order('name', {ascending: true});
     return json(data);
   }
   export async function getCountry(slug: string) {
-      const country = await supabase.from("countries").select().filter('id', 'eq', slug);
-      // use .match() instead
-      // checkpoint: this can be better
-      return json(country?.data?.[0]);
+      const { data, error } = await supabase.from("countries").select().match({ id: slug });
+      return data?.[0];
   }

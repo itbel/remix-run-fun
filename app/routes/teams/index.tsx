@@ -17,8 +17,6 @@ export let loader: LoaderFunction = () => {
 export let action: ActionFunction = async ({ request }) => {
   let body = await request.formData();
   switch (request.method) {
-    case "PUT":
-      await createTeam(body);
     case "DELETE":
       await deleteTeam(body);
   }
@@ -27,18 +25,18 @@ export let action: ActionFunction = async ({ request }) => {
 
 export let meta: MetaFunction = () => {
   return {
-    title: "Testing",
-    description: "Testing some stuff",
+    title: "Test - Teams List",
+    description: "Teams",
   };
 };
 
 export default function Index() {
   let data = useLoaderData<Team[]>();
-  let transition = useTransition();
+
   return (
     <div className="remix__page">
       <main>
-        <h2>Teams</h2>
+        <h2>Teams<Link to={'/teams/new'} style={{marginLeft:16}}>Add a team</Link></h2>
         <table>
           <thead>
             <tr>
@@ -63,22 +61,6 @@ export default function Index() {
             ))}
           </tbody>
         </table>
-        <Form method="put">
-          <fieldset disabled={transition.state === "submitting"}>
-            <label>
-              <input
-                name="name"
-                type="text"
-                required
-                placeholder="Team"
-              ></input>
-            </label>
-
-            <button type="submit">
-              {transition.state === "submitting" ? "Creating..." : "Create"}
-            </button>
-          </fieldset>
-        </Form>
       </main>
     </div>
   );

@@ -45,7 +45,7 @@ export default function Index() {
             </tr>
           </thead>
           <tbody>
-            {data.map((team, index) => (
+            {data?.map((team, index) => (
               <tr key={team.id.toString()}>
                 <td>{index + 1}</td>
                 <td>

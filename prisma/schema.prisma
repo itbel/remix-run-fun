@@ -1,0 +1,72 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                String       @id @unique @default(uuid())
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+  email             String       @unique
+  name              String
+  image             String?
+  ownedTournaments  Tournament[] @relation("owned")
+  joinedTournaments Tournament[] @relation("joined")
+  guesses           Guess[]
+  hashedPassword    String
+}
+
+model Team {
+  id         String       @id @unique @default(uuid())
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  name       String
+  tournament Tournament[]
+  matches    Match[]
+  badgeSrc   String?
+}
+
+model Tournament {
+  id             String   @id @unique @default(uuid())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  tournamentName String
+  teams          Team[]
+  matches        Match[]
+  owner          User     @relation("owned", fields: [ownerId], references: [id])
+  ownerId        String
+  users          User[]   @relation("joined")
+}
+
+model Match {
+  id            String     @id @unique @default(uuid())
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  team          Team[] // this should be 2 separate columns (?)
+  guesses       Guess[]
+  scheduledDate DateTime?
+  tournament    Tournament @relation(fields: [tournamentId], references: [id])
+  tournamentId  String
+  teamAResult   Int?
+  teamBResult   Int?
+}
+
+model Guess {
+  id           String   @id @unique @default(uuid())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  owner        User     @relation(fields: [ownerId], references: [id])
+  ownerId      String
+  match        Match    @relation(fields: [matchId], references: [id])
+  matchId      String
+  teamAGuess   Int?
+  teamBGuess   Int?
+  pointsScored Int      @default(0)
+}

@@ -9,7 +9,8 @@ export type Team = {
 };
 
 export async function getTeams() {
-  const { data, error } = await supabase.from("team").select().order("name");
+  const { data, error } = await supabase.from("Team").select("*")
+  console.log({data})
   return json(data);
 }
 

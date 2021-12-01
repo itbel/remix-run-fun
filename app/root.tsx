@@ -90,9 +90,6 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
                 <Link to="/">Home</Link>
               </li>
               <li>
-                <Link to="/countries">Countries</Link>
-              </li>
-              <li>
                 <Link to="/teams">Teams</Link>
               </li>
             </ul>

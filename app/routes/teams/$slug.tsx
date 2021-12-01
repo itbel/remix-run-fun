@@ -1,11 +1,11 @@
 import { useLoaderData } from "remix";
 import type { LoaderFunction } from "remix";
-import { Team, getTeam } from "~/team";
+import {  getTeam } from "~/team";
+import { Team } from "@prisma/client";
 
 export let loader: LoaderFunction = async ({ params }) => {
   const id = params?.slug?.toString() ?? "";
-  const team = await getTeam(id);
-  return team;
+  return getTeam(id);
 };
 
 export default function PostSlug() {

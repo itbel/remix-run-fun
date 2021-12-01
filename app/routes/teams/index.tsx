@@ -1,14 +1,14 @@
+import { Team } from ".prisma/client";
 import {
   MetaFunction,
   LoaderFunction,
   Form,
   ActionFunction,
-  useTransition,
   Link,
   redirect,
 } from "remix";
 import { useLoaderData } from "remix";
-import { createTeam, deleteTeam, getTeams, Team } from "~/team";
+import {  deleteTeam, getTeams } from "~/team";
 
 export let loader: LoaderFunction = () => {
   return getTeams();
@@ -45,7 +45,7 @@ export default function Index() {
             </tr>
           </thead>
           <tbody>
-            {data?.map((team, index) => (
+            {data.map((team, index) => (
               <tr key={team.id.toString()}>
                 <td>{index + 1}</td>
                 <td>

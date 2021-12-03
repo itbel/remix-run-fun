@@ -95,6 +95,9 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
               <li>
                 <Link to="/matches">Matches</Link>
               </li>
+              <li>
+                <Link to="/tournaments">Tournaments</Link>
+              </li>
             </ul>
           </nav>
         </div>

@@ -1,5 +1,3 @@
-import { json } from "remix";
-import { supabase } from "./utils/initSupabase";
 import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()

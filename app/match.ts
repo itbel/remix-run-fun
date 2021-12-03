@@ -6,6 +6,7 @@ export async function getMatches() {
   const data = await prisma.match.findMany({
     include: {
       team: true,
+      tournament: true
     }
   });
   return data;
@@ -18,6 +19,7 @@ export async function getMatch(slug: string) {
     },
     include: {
       team: true,
+      tournament: true,
     },
   });
   return match;

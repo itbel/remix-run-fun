@@ -1,4 +1,5 @@
 import { Match, Team } from ".prisma/client";
+import { Tournament } from "@prisma/client";
 import {
   MetaFunction,
   LoaderFunction,
@@ -26,9 +27,10 @@ export let meta: MetaFunction = () => {
 export default function Index() {
   let data = useLoaderData<
     Array<
-      Match & {
-        team: Team[];
-      }
+    Match & {
+      team: Team[];
+      tournament: Tournament;
+  }
     >
   >();
 
@@ -55,7 +57,7 @@ export default function Index() {
               return <tr key={match.id.toString()}>
                 <td>{index + 1}</td>
                 <td>
-                  <Link to={match.id.toString()}>{teamA.name + ` ${match.teamAResult} X ${match.teamBResult} ` + teamB.name}</Link>
+                  <Link to={match.id.toString()}>{teamA.name + ` ${match.teamAResult ?? ''} X ${match.teamBResult ?? ''} ` + teamB.name}</Link>
                 </td>
                 <td>
                   <Form method="delete">
